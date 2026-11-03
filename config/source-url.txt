@@ -1,1 +1,1 @@
-https://invalid.example.invalid
+https://monetary-detect-keys-trailer.trycloudflare.com
