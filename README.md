@@ -51,8 +51,9 @@ To check a Case Pack against this copy, add the pack: `sentinel_verify.py pack.z
 
 ## Operations
 
-- Source URL: repository variable `SENTINEL_BASE_URL` (the site's https origin). The
-  Sentinel host updates it when its address changes; a wrong URL can only make runs fail
-  (visible), never rewrite stored history.
+- Source URL: `config/source-url.txt` (the site's https origin; a repository variable
+  `SENTINEL_BASE_URL` overrides it). The operator updates it when the site's address
+  changes, as a normal commit; a wrong URL can only make runs fail (visible), never
+  rewrite stored history.
 - New issuer key (for example a new production server): add it to
   `config/issuer-keys.txt` in a reviewed commit; it starts its own series.

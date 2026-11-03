@@ -80,9 +80,13 @@ def series_dir(public_key_hex: str) -> Path:
 
 
 def main() -> int:
-    base_url = os.environ.get("SENTINEL_BASE_URL", "").strip()
+    # Repository variable if set, otherwise config/source-url.txt (each change is a commit).
+    base_url = os.environ.get("SENTINEL_BASE_URL", "").strip() or (
+        (ROOT / "config" / "source-url.txt").read_text().strip()
+        if (ROOT / "config" / "source-url.txt").exists() else ""
+    )
     if not base_url.startswith("https://"):
-        fail(2, "SENTINEL_BASE_URL (repository variable) must be an https:// URL")
+        fail(2, "source URL (variable SENTINEL_BASE_URL or config/source-url.txt) must be https://")
     log = fetch(base_url)
     records = [r for r in log.get("checkpoints", []) if isinstance(r, dict)]
     if not records:
