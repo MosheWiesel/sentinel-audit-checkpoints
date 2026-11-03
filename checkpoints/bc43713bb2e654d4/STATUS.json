@@ -1,0 +1,11 @@
+{
+  "source": "https://monetary-detect-keys-trailer.trycloudflare.com",
+  "series": "bc43713bb2e654d4",
+  "latest_sequence": 1,
+  "latest_issued_at": "2026-11-03T18:10:54.947168+00:00",
+  "latest_totals": {
+    "batches": 15,
+    "entries": 1310
+  },
+  "replicated_at": "2026-11-03T18:14:53.908146+00:00"
+}
