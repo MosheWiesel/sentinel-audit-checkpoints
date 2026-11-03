@@ -30,8 +30,8 @@ without that being visible.
 - `checkpoints/<fingerprint>/STATUS.json` — the latest replicated sequence and totals.
 - `verifier/sentinel_verify.py` — pinned copy of the Sentinel offline verifier
   (SHA-256 `2f04925b421a13ccc440b7629e68e0941a08b7427e7d79c45cfad56d80c0f665`);
-  `verifier/tsa-trust-anchors.pem` — FreeTSA root (SHA-256
-  `2151b61137ffa86bf664691ba67e7da0b19f98c758e3d228d5d8ebf27e044438`).
+  `verifier/tsa-trust-anchors.pem` — FreeTSA, DigiCert and Sectigo timestamping roots
+  (SHA-256 `1c3a47ee7f5caf80d1f1837d2292bdc5e8bf157b97324494599aa9c89890ffb6`; per-certificate fingerprints inside the file).
 
 ## Verify it yourself
 
