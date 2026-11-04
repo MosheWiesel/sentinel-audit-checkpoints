@@ -23,6 +23,19 @@ notifies the repository owner; the issue closes on the next healthy run. The def
 is protected against force-pushes and deletion, so stored history cannot be rewritten
 without that being visible.
 
+## Anchored in Bitcoin
+
+Each stored checkpoint gets an [OpenTimestamps](https://opentimestamps.org) proof,
+`<sequence>.json.ots`. Once a proof is complete, it shows the checkpoint existed by the time of
+that Bitcoin block, with no need to trust Sentinel, GitHub or a timestamp authority:
+
+    pip install opentimestamps-client
+    ots verify checkpoints/<fingerprint>/000001.json.ots
+
+A new proof is pending for some hours until the calendars commit it to a block; later runs
+complete it. `ots verify` needs a local Bitcoin node, or use a proof explorer such as
+<https://opentimestamps.org>. A failed stamp does not fail the run, and the next run tries again.
+
 ## Layout
 
 - `checkpoints/<issuer key fingerprint>/<sequence>.json` — one file per checkpoint, exactly

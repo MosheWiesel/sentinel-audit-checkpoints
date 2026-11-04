@@ -2,3 +2,4 @@ __pycache__/
 *.pyc
 replicate.log
 log.json
+.ots/

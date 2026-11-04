@@ -1,0 +1,1 @@
+opentimestamps-client==0.8.0

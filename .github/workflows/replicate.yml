@@ -39,6 +39,12 @@ jobs:
           SENTINEL_BASE_URL: ${{ vars.SENTINEL_BASE_URL }}
         run: python scripts/replicate.py 2>&1 | tee replicate.log
 
+      - name: Anchor checkpoints in Bitcoin (OpenTimestamps)
+        run: |
+          python -m venv .ots
+          .ots/bin/python -m pip install --disable-pip-version-check -q -r requirements-ots.txt
+          PATH="$PWD/.ots/bin:$PATH" python scripts/anchor.py
+
       - name: Commit new checkpoints
         run: |
           git config user.name "checkpoint-replicator"
