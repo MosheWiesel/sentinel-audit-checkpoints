@@ -23,6 +23,7 @@ import os
 import subprocess
 import sys
 import tempfile
+import time
 import urllib.request
 from datetime import UTC, datetime
 from pathlib import Path
@@ -43,15 +44,23 @@ def pinned_keys() -> set[str]:
     return {line.split("#", 1)[0].strip().lower() for line in lines if line.split("#", 1)[0].strip()}
 
 
+ATTEMPTS = 4
+
+
 def fetch(base_url: str) -> dict:
     request = urllib.request.Request(
         base_url.rstrip("/") + LOG_PATH, headers={"User-Agent": "sentinel-checkpoint-replicator"}
     )
-    try:
-        with urllib.request.urlopen(request, timeout=60) as response:
-            data = json.load(response)
-    except Exception as exc:
-        fail(2, f"cannot download the log: {type(exc).__name__}: {exc}")
+    # The public address drops the first connection after a quiet spell now and then.
+    for attempt in range(1, ATTEMPTS + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=60) as response:
+                data = json.load(response)
+            break
+        except Exception as exc:
+            if attempt == ATTEMPTS:
+                fail(2, f"cannot download the log: {type(exc).__name__}: {exc}")
+            time.sleep(10 * attempt)
     if not isinstance(data, dict) or data.get("format") != LIST_FORMAT:
         fail(2, "the response is not a sentinel-audit-checkpoints/1 document")
     return data

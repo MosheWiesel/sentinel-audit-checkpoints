@@ -40,12 +40,14 @@ jobs:
         run: python scripts/replicate.py 2>&1 | tee replicate.log
 
       - name: Anchor checkpoints in Bitcoin (OpenTimestamps)
+        if: always()
         run: |
           python -m venv .ots
           .ots/bin/python -m pip install --disable-pip-version-check -q -r requirements-ots.txt
           PATH="$PWD/.ots/bin:$PATH" python scripts/anchor.py
 
       - name: Commit new checkpoints
+        if: always()
         run: |
           git config user.name "checkpoint-replicator"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
