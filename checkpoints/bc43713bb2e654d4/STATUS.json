@@ -1,11 +1,11 @@
 {
   "source": "https://sentinel.tail58537d.ts.net",
   "series": "bc43713bb2e654d4",
-  "latest_sequence": 17,
-  "latest_issued_at": "2026-11-19T18:48:23.513366+00:00",
+  "latest_sequence": 18,
+  "latest_issued_at": "2026-11-20T18:52:08.418014+00:00",
   "latest_totals": {
-    "batches": 585,
-    "entries": 23685
+    "batches": 656,
+    "entries": 27894
   },
-  "replicated_at": "2026-11-19T20:32:07.412474+00:00"
+  "replicated_at": "2026-11-20T20:10:59.602713+00:00"
 }
